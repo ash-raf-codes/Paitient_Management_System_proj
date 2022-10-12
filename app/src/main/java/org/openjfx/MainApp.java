@@ -4,20 +4,49 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
 public class MainApp extends Application {
 
+    
+
     @Override
     public void start(Stage stage) throws Exception {
+        // Set up business objects here!
+
+        /*
+        // Set up scene
         Parent root = FXMLLoader.load(getClass().getResource("homescreen.fxml"));
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-        
+        Scene homeScene = new Scene(root);
+        homeScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+       
+        // Launches stage (window)
         stage.setTitle("Rementi: Patient and Staff Scheduler");
-        stage.setScene(scene);
+        stage.setScene(homeScene);
+        stage.show();*/
+
+        //Scene 1
+        VBox layout1 = new VBox(20);     
+        Label label1= new Label("Rementi: Patient and Staff Scheduler");
+        Button button1= new Button("Add Patient"); 
+        layout1.getChildren().addAll(label1, button1);
+        Scene scene1 = new Scene(layout1, 300, 250);
+        //Scene 2
+        VBox layout2= new VBox(20);
+        Label label2= new Label("This is the 'add patient' screen");
+        Button button2= new Button("Go back to home");
+        layout2.getChildren().addAll(label2, button2);
+        Scene scene2 = new Scene(layout2,300,250);
+        //Actions
+        button1.setOnAction(e -> stage.setScene(scene2));          
+        button2.setOnAction(e -> stage.setScene(scene1));
+        
+                
+        stage.setScene(scene1);
         stage.show();
     }
 
