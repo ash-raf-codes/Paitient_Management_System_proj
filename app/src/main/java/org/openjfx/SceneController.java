@@ -1,5 +1,5 @@
 /* This class is an attempt to have an elegant scene manager with fxml scenes.
- * It doesn't work. But it's also harmless.
+ * It doesn't work. But it's harmless.
  * --Madelyn
  */
 

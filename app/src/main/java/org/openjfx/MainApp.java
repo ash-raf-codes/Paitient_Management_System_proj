@@ -18,17 +18,21 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         // Set up business objects here!
 
-        /*
-        // Set up scene
-        Parent root = FXMLLoader.load(getClass().getResource("homescreen.fxml"));
-        Scene homeScene = new Scene(root);
+        // Set up scene switcher
+        SceneSwitcher sceneSwitcher = new SceneSwitcher();
+
+        // Set up home scene
+        //Parent root = FXMLLoader.load(getClass().getResource("homescreen.fxml"));
+        HomePane homePane = new HomePane(stage);
+        Scene homeScene = new Scene(homePane,900,600);
         homeScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
        
         // Launches stage (window)
-        stage.setTitle("Rementi: Patient and Staff Scheduler");
+        stage.setTitle("Rementi: Patient and Staff Scheduler Home Screen");
         stage.setScene(homeScene);
-        stage.show();*/
+        stage.show();
 
+        /* This code block is a brute force, ugly way to swap scenes
         //Scene 1
         VBox layout1 = new VBox(20);     
         Label label1= new Label("Rementi: Patient and Staff Scheduler");
@@ -48,6 +52,7 @@ public class MainApp extends Application {
                 
         stage.setScene(scene1);
         stage.show();
+        */
     }
 
     public static void main(String[] args) {
