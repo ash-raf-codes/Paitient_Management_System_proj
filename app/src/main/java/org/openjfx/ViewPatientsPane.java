@@ -8,10 +8,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-//import java.io.*;
-//import java.util.*;
-//import com.github.cliftonlabs.json_simple.JsonObject;
-//import com.github.cliftonlabs.json_simple.Jsonable;
+import java.io.*;
+import java.util.Iterator;
+
+import org.json.simple.parser.*;
+import org.json.simple.JSONArray; 
+import org.json.simple.JSONObject; 
 
 public class ViewPatientsPane extends VBox {
     
@@ -22,8 +24,21 @@ public class ViewPatientsPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Current Patients:");
+        Label pListLabel = new Label("");
         Button exitButton = new Button("Exit");
-        this.getChildren().addAll(welcomeLabel,exitButton);
+        this.getChildren().addAll(welcomeLabel,pListLabel,exitButton);
+
+        try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader("patients.json"));
+            JSONArray pList = (JSONArray)obj;
+            Iterator iterator = pList.iterator();
+            String pListString = "";
+            while (iterator.hasNext()) {
+                pListString = pListString + iterator.next().toString() + "\n";
+            }
+            pListLabel.setText(pListString);
+        } catch (Exception e) { e.printStackTrace(); }
         
         // Action handler make thing happen when button click
         exitButton.setOnAction(new EventHandler<ActionEvent>() {

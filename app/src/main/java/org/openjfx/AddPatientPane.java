@@ -10,14 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.*;
-import java.util.*;
-import org.json.simple.*;
 import org.json.simple.parser.*;
-
-import java.io.FileNotFoundException; 
-import java.io.PrintWriter; 
-import java.util.LinkedHashMap; 
-import java.util.Map; 
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 
@@ -46,20 +39,11 @@ public class AddPatientPane extends VBox {
                     JSONParser parser = new JSONParser();
                     Object obj = parser.parse(new FileReader("patients.json"));
                     JSONArray pList = (JSONArray)obj;
-                    System.out.println(pList);
-                    /*   wut dis?????
-                    Iterator iterator = subjects.iterator();
-                    while (iterator.hasNext()) {
-                        System.out.println(iterator.next());
-                    }
-                    */
                     
                     JSONObject jo = new JSONObject();
-
                     jo.put("firstName", pfNameField.getText()); 
                     jo.put("lastName", plNameField.getText()); 
                     jo.put("dob", dobField.getText());
-                    System.out.println(jo);
                     pList.add(jo);
                     
                     // writing JSON to file:"JSONExample.json" in cwd 
