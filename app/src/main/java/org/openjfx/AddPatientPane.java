@@ -1,7 +1,7 @@
 package org.openjfx;
 
 import javafx.stage.Stage;
-import javafx.scene.Scene;
+//import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,8 +11,15 @@ import javafx.scene.control.TextField;
 
 import java.io.*;
 import java.util.*;
-//import org.json.simple.*;
-//import org.json.simple.parser.*;
+import org.json.simple.*;
+import org.json.simple.parser.*;
+
+import java.io.FileNotFoundException; 
+import java.io.PrintWriter; 
+import java.util.LinkedHashMap; 
+import java.util.Map; 
+import org.json.simple.JSONArray; 
+import org.json.simple.JSONObject; 
 
 public class AddPatientPane extends VBox {
     
@@ -23,10 +30,12 @@ public class AddPatientPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Welcome to the 'add patient' wizard.");
-        TextField pNameField = new TextField("Enter name here");
+        TextField pfNameField = new TextField("First Name");
+        TextField plNameField = new TextField("Last Name");
+        TextField dobField = new TextField("Date of Birth (yyyy-mm-dd)");
         Button addPatientButton = new Button("Add Patient");
         Button exitButton = new Button("Exit without saving");
-        this.getChildren().addAll(welcomeLabel,pNameField,addPatientButton,exitButton);
+        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,addPatientButton,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -34,18 +43,31 @@ public class AddPatientPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    // create a writer
-                    //BufferedWriter writer = Files.newBufferedWriter(Paths.get("book.json"));
+                    JSONParser parser = new JSONParser();
+                    Object obj = parser.parse(new FileReader("patients.json"));
+                    JSONArray pList = (JSONArray)obj;
+                    System.out.println(pList);
+                    /*   wut dis?????
+                    Iterator iterator = subjects.iterator();
+                    while (iterator.hasNext()) {
+                        System.out.println(iterator.next());
+                    }
+                    */
+                    
+                    JSONObject jo = new JSONObject();
 
-                    // create book object
-                    //Book book = new Book("Thinking in Java", "978-0131872486", 1998, new String[] {"Bruce Eckel"});
-
-                    // convert book object to JSON and write to book.json
-                    //Jsoner.serialize(book, writer);
-
-                    // close the writer
-                    //writer.close();
-                } catch (Exception e) { return; }
+                    jo.put("firstName", pfNameField.getText()); 
+                    jo.put("lastName", plNameField.getText()); 
+                    jo.put("dob", dobField.getText());
+                    System.out.println(jo);
+                    pList.add(jo);
+                    
+                    // writing JSON to file:"JSONExample.json" in cwd 
+                    FileWriter pw = new FileWriter("patients.json"); 
+                    pw.write(pList.toJSONString()); 
+                    pw.flush(); 
+                    pw.close(); 
+                } catch (Exception e) { e.printStackTrace(); }
             }
         });  // Note this weird }); for action handlers
 

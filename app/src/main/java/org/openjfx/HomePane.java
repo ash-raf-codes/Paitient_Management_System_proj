@@ -1,7 +1,7 @@
 package org.openjfx;
 
 import javafx.stage.Stage;
-import javafx.scene.Scene;
+//import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

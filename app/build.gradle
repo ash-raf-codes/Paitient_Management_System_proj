@@ -5,6 +5,9 @@ plugins {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'src/main/resources'
+    }
 }
 
 javafx {
@@ -14,4 +17,11 @@ javafx {
 
 application {
     mainClass = 'org.openjfx.MainApp'
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation('org.json:json:20220924')
+    implementation('com.github.cliftonlabs:json-simple:3.1.0')
+    implementation name: 'json-simple-1.1.1'
 }

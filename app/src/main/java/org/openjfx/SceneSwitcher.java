@@ -10,7 +10,7 @@ public class SceneSwitcher {
     public SceneSwitcher(){}
 
     public static void sceneSwitch(Stage stage, HomePane home) {
-        Scene homeScene = new Scene(home,900,600);
+        Scene homeScene = new Scene(home,MainApp.WIDTH,MainApp.HEIGHT);
         //viewPatientsScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setTitle(home.title);
         stage.setScene(homeScene);
@@ -18,7 +18,7 @@ public class SceneSwitcher {
     }
 
     public static void sceneSwitch(Stage stage, AddPatientPane apPane) {
-        Scene addPatientScene = new Scene(apPane,900,600);
+        Scene addPatientScene = new Scene(apPane,MainApp.WIDTH,MainApp.HEIGHT);
         //addPatientScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setTitle(apPane.title);
         stage.setScene(addPatientScene);
@@ -26,7 +26,7 @@ public class SceneSwitcher {
     }
 
     public static void sceneSwitch(Stage stage, ViewPatientsPane vpPane) {
-        Scene viewPatientsScene = new Scene(vpPane,900,600);
+        Scene viewPatientsScene = new Scene(vpPane,MainApp.WIDTH,MainApp.HEIGHT);
         //viewPatientsScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setTitle(vpPane.title);
         stage.setScene(viewPatientsScene);
@@ -34,7 +34,7 @@ public class SceneSwitcher {
     }
     
     public static void sceneSwitch(Stage stage, Pane pane) {
-        Scene newScene = new Scene(pane,900,600);
+        Scene newScene = new Scene(pane,MainApp.WIDTH,MainApp.HEIGHT);
         //viewPatientsScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         //stage.setTitle(pane.title);
         stage.setScene(newScene);
