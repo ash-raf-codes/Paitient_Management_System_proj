@@ -26,9 +26,10 @@ public class AddPatientPane extends VBox {
         TextField pfNameField = new TextField("First Name");
         TextField plNameField = new TextField("Last Name");
         TextField dobField = new TextField("Date of Birth (yyyy-mm-dd)");
+        Label pAddedLabel = new Label(" ");
         Button addPatientButton = new Button("Add Patient");
         Button exitButton = new Button("Exit without saving");
-        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,addPatientButton,exitButton);
+        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,pAddedLabel,addPatientButton,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -51,6 +52,8 @@ public class AddPatientPane extends VBox {
                     pw.write(pList.toJSONString()); 
                     pw.flush(); 
                     pw.close(); 
+                    pAddedLabel.setText("Patient added!");
+
                 } catch (Exception e) { e.printStackTrace(); }
             }
         });  // Note this weird }); for action handlers

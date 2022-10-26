@@ -15,7 +15,7 @@ public class HomePane extends VBox {
 
     public HomePane(Stage stage) {
         // Set up screen elements
-        this.setSpacing(10);
+        this.setSpacing(20);
         Label welcomeLabel = new Label("Welcome to Rementi care home management system!");
         Button addPatientButton = new Button("Add Patient");
         Button viewPatientsButton = new Button("View Patients");

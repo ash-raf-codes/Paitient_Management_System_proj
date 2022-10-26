@@ -25,8 +25,10 @@ public class ViewPatientsPane extends VBox {
         this.setSpacing(10);
         Label welcomeLabel = new Label("Current Patients:");
         Label pListLabel = new Label("");
+        Label clearedLabel = new Label("");
         Button exitButton = new Button("Exit");
-        this.getChildren().addAll(welcomeLabel,pListLabel,exitButton);
+        Button clearButton = new Button("Clear List [debug feature]");
+        this.getChildren().addAll(welcomeLabel,pListLabel,clearButton,exitButton);
 
         try {
             JSONParser parser = new JSONParser();
@@ -48,8 +50,21 @@ public class ViewPatientsPane extends VBox {
                     SceneSwitcher.sceneSwitch(stage, new HomePane(stage));
                 } catch (Exception e) { return; }
             }
-            
+        });  // Note this weird }); for action handlers
+
+        clearButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    FileWriter pw = new FileWriter("patients.json"); 
+                    pw.write("[]"); 
+                    pw.flush(); 
+                    pw.close(); 
+                    pListLabel.setText("");
+                    clearedLabel.setText("List cleared");
+
+                } catch (Exception e) { e.printStackTrace(); }
+            }
         });  // Note this weird }); for action handlers
     }
-    
 }
