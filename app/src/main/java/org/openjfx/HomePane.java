@@ -19,7 +19,8 @@ public class HomePane extends VBox {
         Label welcomeLabel = new Label("Welcome to Rementi care home management system!");
         Button addPatientButton = new Button("Add Patient");
         Button viewPatientsButton = new Button("View Patients");
-        this.getChildren().addAll(welcomeLabel,addPatientButton,viewPatientsButton);
+        Button addActivityButton = new Button("Add Activity");
+        this.getChildren().addAll(welcomeLabel,addPatientButton,viewPatientsButton, addActivityButton);
 
         // Action handler make thing happen when button click
         addPatientButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -36,6 +37,15 @@ public class HomePane extends VBox {
             public void handle(ActionEvent event) {
                 try {
                     SceneSwitcher.sceneSwitch(stage, new ViewPatientsPane(stage));
+                } catch (Exception e) { return; }
+            }
+        });  // Note this weird }); for action handlers
+
+        addActivityButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    SceneSwitcher.sceneSwitch(stage, new AddActivityPane(stage));
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
