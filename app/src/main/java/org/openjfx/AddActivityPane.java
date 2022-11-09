@@ -14,6 +14,8 @@ import org.json.simple.parser.*;
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 
+
+// This is the builder for the Activity.java and employs a builder pattern
 public class AddActivityPane extends VBox {
     
     // The title that should always be on the window (stage) when this pane is active
@@ -23,7 +25,8 @@ public class AddActivityPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Welcome to the 'Add activity' wizard.");
-        TextField paNameField = new TextField("Patient Name");
+        TextField paFNameField = new TextField("Patient First Name");
+        TextField paLNameField = new TextField("Patient Last Name");
         TextField acNameField = new TextField("Activity Name");
         TextField dtField = new TextField("Date(yyyy-mm-dd)");
         TextField stField = new TextField("Time (hr:min)");
@@ -31,7 +34,7 @@ public class AddActivityPane extends VBox {
         Label pAddedLabel = new Label(" ");
         Button addActivity = new Button("Schedule activity");
         Button exitButton = new Button("Exit without saving");
-        this.getChildren().addAll(welcomeLabel,paNameField,acNameField,dtField,pAddedLabel, stField, etField, addActivity,exitButton);
+        this.getChildren().addAll(welcomeLabel,paFNameField,paLNameField,acNameField,dtField,pAddedLabel, stField, etField, addActivity,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -44,7 +47,8 @@ public class AddActivityPane extends VBox {
                     JSONArray pList = (JSONArray)obj;
                     
                     JSONObject jo = new JSONObject();
-                    jo.put("paName", paNameField.getText()); 
+                    jo.put("paFName", paFNameField.getText());
+                    jo.put("paLName", paLNameField.getText()); 
                     jo.put("acName", acNameField.getText()); 
                     jo.put("dt", dtField.getText());
                     jo.put("st", stField.getText());
