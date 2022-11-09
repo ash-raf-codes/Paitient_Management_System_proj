@@ -1,7 +1,6 @@
 package org.openjfx;
 
 import javafx.stage.Stage;
-//import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,15 +12,15 @@ import java.io.*;
 import org.json.simple.parser.*;
 import org.json.simple.JSONArray; 
 
-public class ViewPatientsPane extends VBox {
+public class ViewWorkersPane extends VBox {
     
     // The title that should always be on the window (stage) when this pane is active
-    public static final String title = "Rementi: View Patients";
+    public static final String title = "Rementi: View Care Workers";
 
-    public ViewPatientsPane(Stage stage) {
+    public ViewWorkersPane(Stage stage) {
         // Set up screen elements
         this.setSpacing(10);
-        Label welcomeLabel = new Label("Current Patients:");
+        Label welcomeLabel = new Label("Current Care Workers:");
         Label pListLabel = new Label("");
         Label clearedLabel = new Label("");
         Button exitButton = new Button("Exit");
@@ -30,7 +29,7 @@ public class ViewPatientsPane extends VBox {
 
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("./src/main/resources/patients.json"));
+            Object obj = parser.parse(new FileReader("./src/main/resources/careworkers.json"));
             JSONArray pList = (JSONArray)obj;
             var iterator = pList.iterator();
             String pListString = "";
@@ -54,7 +53,7 @@ public class ViewPatientsPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    FileWriter pw = new FileWriter("./src/main/resources/patients.json"); 
+                    FileWriter pw = new FileWriter("./src/main/resources/careworkers.json"); 
                     pw.write("[]"); 
                     pw.flush(); 
                     pw.close(); 

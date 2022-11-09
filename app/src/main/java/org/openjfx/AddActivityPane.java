@@ -23,7 +23,7 @@ public class AddActivityPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Welcome to the 'Add activity' wizard.");
-        TextField paNameField = new TextField("Paitient Name");
+        TextField paNameField = new TextField("Patient Name");
         TextField acNameField = new TextField("Activity Name");
         TextField dtField = new TextField("Date(yyyy-mm-dd)");
         TextField stField = new TextField("Time (hr:min)");
@@ -40,7 +40,7 @@ public class AddActivityPane extends VBox {
             public void handle(ActionEvent event) {
                 try {
                     JSONParser parser = new JSONParser();
-                    Object obj = parser.parse(new FileReader("patients.json"));
+                    Object obj = parser.parse(new FileReader("./src/main/resources/activity.json"));
                     JSONArray pList = (JSONArray)obj;
                     
                     JSONObject jo = new JSONObject();
@@ -52,7 +52,7 @@ public class AddActivityPane extends VBox {
                     pList.add(jo);
                     
                     // writing JSON to file:"JSONExample.json" in cwd 
-                    FileWriter pw = new FileWriter("activity.json"); 
+                    FileWriter pw = new FileWriter("./src/main/resources/activity.json"); 
                     pw.write(pList.toJSONString()); 
                     pw.flush(); 
                     pw.close(); 
