@@ -1,5 +1,7 @@
 package org.openjfx;
 
+import org.openjfx.Units.Activity;
+import java.time.LocalTime;
 import javafx.stage.Stage;
 //import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -30,12 +32,14 @@ public class AddActivityPane extends VBox {
         TextField paLNameField = new TextField("Patient Last Name");
         TextField acNameField = new TextField("Activity Name");
         TextField dtField = new TextField("Date(yyyy-mm-dd)");
-        TextField stField = new TextField("Time (hr:min)");
-        TextField etField = new TextField("Time (hr:min)");
+        TextField stFieldHr = new TextField("Start hour");
+        TextField stFieldMins = new TextField("Start min");
+        TextField etFieldHr = new TextField("End hour");
+        TextField etFieldMins = new TextField("End min");
         Label pAddedLabel = new Label(" ");
         Button addActivity = new Button("Schedule activity");
         Button exitButton = new Button("Exit without saving");
-        this.getChildren().addAll(welcomeLabel,paFNameField,paLNameField,acNameField,dtField,pAddedLabel, stField, etField, addActivity,exitButton);
+        this.getChildren().addAll(welcomeLabel,paFNameField,paLNameField,acNameField,dtField,pAddedLabel,stFieldHr,stFieldMins,etFieldHr,etFieldMins,addActivity,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -52,8 +56,10 @@ public class AddActivityPane extends VBox {
                     jo.put("paLName", paLNameField.getText()); 
                     jo.put("acName", acNameField.getText()); 
                     jo.put("dt", dtField.getText());
-                    jo.put("st", stField.getText());
-                    jo.put("et", etField.getText());
+                    jo.put("sthr", stFieldHr.getText());
+                    jo.put("stmin", stFieldMins.getText());
+                    jo.put("ethr", stFieldHr.getText());
+                    jo.put("etmin", etFieldMins.getText());
                     pList.add(jo);
                     
                     // writing JSON to file:"JSONExample.json" in cwd 
@@ -62,6 +68,15 @@ public class AddActivityPane extends VBox {
                     pw.flush(); 
                     pw.close(); 
                     pAddedLabel.setText("Activity added!");
+
+                    int startHour = Integer.parseInt(stFieldHr.getText());
+                    int startMins = Integer.parseInt(stFieldMins.getText());
+
+                    int endHour = Integer.parseInt(etFieldHr.getText());
+                    int endMins = Integer.parseInt(etFieldMins.getText());
+                
+                    //I think this needs to be able to append to SchedulerPane.java
+                    Activity newAc = new Activity(acNameField.getText(),LocalTime.of(startHour,startMins),LocalTime.of(endHour,endMins)); 
 
                 } catch (Exception e) { e.printStackTrace(); }
             }
