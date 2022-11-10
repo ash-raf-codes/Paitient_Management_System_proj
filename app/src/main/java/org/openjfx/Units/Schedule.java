@@ -3,16 +3,29 @@ package org.openjfx.Units;
 public class Schedule
 {
     private DayPlan[] weekPlan;
-    //TODO schedule should be attached to a patient
+    private Patient patient;
 
     public Schedule()
     {
-        this.weekPlan = new DayPlan[7];
+        setPlan(new DayPlan[7]);
+        setPatient(new Patient("John","Doe","12345",1950,01,01,"Old age"));
+    }
+
+    public Schedule(Patient p)
+    {
+        setPlan(new DayPlan[7]);
+        setPatient(p);
     }
 
     public Schedule (DayPlan[] plan)
     {
         setPlan(plan);
+    }
+
+    public Schedule (DayPlan[] plan, Patient p)
+    {
+        setPlan(plan);
+        setPatient(p);
     }
 
     public void setPlan (DayPlan[] newPlan)
@@ -33,5 +46,15 @@ public class Schedule
     public DayPlan getDayPlan (int day)
     {
         return weekPlan[day];
+    }
+
+    public Patient getPatient ()
+    {
+        return patient;
+    }
+
+    public void setPatient(Patient newPatient)
+    {
+        this.patient = newPatient;
     }
 }
