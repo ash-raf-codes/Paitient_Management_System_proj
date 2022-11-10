@@ -5,7 +5,7 @@ public class Person
     private String firstName;
     private String lastName;
     private String id;
-    private DOB dob;
+    private String dob;
 
     public void setName(String fn, String ln)
     {
@@ -33,12 +33,12 @@ public class Person
         return id;
     }
 
-    public void setDOB(int year, int month, int day)
+    public void setDOB(String dob)
     {
-        dob = new DOB(year, month, day);
+        this.dob = dob;
     }
 
-    public DOB getDob() 
+    public String getDob() 
     {
         return dob;
     }

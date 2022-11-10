@@ -6,11 +6,11 @@ public class Employee extends Person
 {
     private LinkedList<Patient> patients;
 
-    public Employee(String fn, String ln, String id, int year, int month, int day)
+    public Employee(String fn, String ln, String id, String dob)
     {
         setName(fn, ln);
         setEmployeeID(id);
-        setDOB(year, month, day);
+        setDOB(dob);
         this.patients = new LinkedList<Patient>();
     }
 

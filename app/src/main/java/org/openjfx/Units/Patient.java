@@ -6,25 +6,24 @@ public class Patient extends Person
     private Schedule schedule;
     private Employee careWorker;
 
-    
-
-    public Patient(String fn, String ln, String id, int year, int month, int day, String diagnosis, Employee cw)
+    public Patient(String fn, String ln, String id, String dob, String diagnosis, Employee cw)
     {
         setName(fn, ln);
         setHealthCardNumber(id);
-        setDOB(year, month, day);
+        setDOB(dob);
         setDiagnosis(diagnosis);
         setSchedule(new Schedule());
         setCareWorker(cw);
     }
-    public Patient(String fn, String ln, String id, int year, int month, int day, String diagnosis)
+
+    public Patient(String fn, String ln, String id, String dob, String diagnosis)
     {
         setName(fn, ln);
         setHealthCardNumber(id);
-        setDOB(year, month, day);
+        setDOB(dob);
         setDiagnosis(diagnosis);
-        setSchedule(new Schedule());
-        setCareWorker(new Employee("Bob","Smith","98765",1990,01,01));
+        setSchedule(new Schedule(this));
+        setCareWorker(new Employee("Bob","Smith","98765","1990-01-01"));
     }
 
     public String getHealthCardNumber()
@@ -61,5 +60,9 @@ public class Patient extends Person
     public void setCareWorker(Employee careWorker) 
     {
         this.careWorker = careWorker;
+    }
+
+    public String toString() {
+        return "Full name: " + getFirstName() + " " + getLastName() + ", Date of birth: " + getDob();
     }
 }

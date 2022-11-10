@@ -11,8 +11,12 @@ import javafx.scene.control.Label;
 import java.io.*;
 
 import org.json.simple.parser.*;
+import org.openjfx.Units.PatientAdapter;
 import org.openjfx.commands.SwitchToHome;
 import org.json.simple.JSONArray; 
+
+import java.util.LinkedList;
+import org.openjfx.Units.*;
 
 public class ViewPatientsPane extends VBox {
     
@@ -30,10 +34,9 @@ public class ViewPatientsPane extends VBox {
         this.getChildren().addAll(welcomeLabel,pListLabel,clearButton,exitButton);
 
         try {
-            JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("./src/main/resources/patients.json"));
-            JSONArray pList = (JSONArray)obj;
-            var iterator = pList.iterator();
+            LinkedList<Patient> plist = PatientAdapter.retrievePatients();
+
+            var iterator = plist.iterator();
             String pListString = "";
             while (iterator.hasNext()) {
                 pListString = pListString + iterator.next().toString() + "\n";

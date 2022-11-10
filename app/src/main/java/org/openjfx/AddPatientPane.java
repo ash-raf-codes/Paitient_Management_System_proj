@@ -8,11 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.*;
-import org.json.simple.parser.*;
 import org.openjfx.commands.SwitchToHome;
-import org.json.simple.JSONArray; 
-import org.json.simple.JSONObject; 
+
+import org.openjfx.Units.*;
 
 public class AddPatientPane extends VBox {
     
@@ -37,20 +35,8 @@ public class AddPatientPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    JSONParser parser = new JSONParser();
-                    Object obj = parser.parse(new FileReader("./src/main/resources/patients.json"));
-                    JSONArray pList = (JSONArray)obj;
-                    
-                    JSONObject jo = new JSONObject();
-                    jo.put("firstName", pfNameField.getText()); 
-                    jo.put("lastName", plNameField.getText()); 
-                    jo.put("dob", dobField.getText());
-                    pList.add(jo);
-                    
-                    FileWriter pw = new FileWriter("./src/main/resources/patients.json"); 
-                    pw.write(pList.toJSONString()); 
-                    pw.flush(); 
-                    pw.close(); 
+                    Patient newpatient = new Patient(pfNameField.getText(), plNameField.getText(),"123456", dobField.getText(),"diagnosis");
+                    PatientAdapter.storePatient(newpatient);
                     pAddedLabel.setText("Patient added!");
 
                 } catch (Exception e) { e.printStackTrace(); }
