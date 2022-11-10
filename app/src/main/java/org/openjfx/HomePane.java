@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.openjfx.commands.*;
 
 public class HomePane extends GridPane {
     
@@ -47,7 +48,8 @@ public class HomePane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new AddPatientPane(stage));
+                    SwitchToAddPatient addPatient = new SwitchToAddPatient();
+                    addPatient.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
@@ -56,7 +58,8 @@ public class HomePane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new ViewPatientsPane(stage));
+                    SwitchToViewPatients viewPatients = new SwitchToViewPatients();
+                    viewPatients.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
@@ -65,7 +68,8 @@ public class HomePane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new AddWorkerPane(stage));
+                    SwitchToAddWorker addWorker = new SwitchToAddWorker();
+                    addWorker.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
@@ -74,7 +78,8 @@ public class HomePane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new ViewWorkersPane(stage));
+                    SwitchToViewWorkers viewWorkers = new SwitchToViewWorkers();
+                    viewWorkers.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
@@ -83,7 +88,8 @@ public class HomePane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new AddActivityPane(stage));
+                    SwitchToAddActivity addActivity = new SwitchToAddActivity();
+                    addActivity.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
@@ -92,7 +98,8 @@ public class HomePane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new SchedulerPane(stage));
+                    SwitchToScheduler scheduler = new SwitchToScheduler();
+                    scheduler.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers

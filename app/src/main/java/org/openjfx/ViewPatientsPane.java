@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import java.io.*;
 
 import org.json.simple.parser.*;
+import org.openjfx.commands.SwitchToHome;
 import org.json.simple.JSONArray; 
 
 public class ViewPatientsPane extends VBox {
@@ -45,7 +46,8 @@ public class ViewPatientsPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new HomePane(stage));
+                    SwitchToHome home = new SwitchToHome();
+                    home.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers

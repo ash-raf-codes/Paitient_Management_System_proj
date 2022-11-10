@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import org.openjfx.Units.Activity;
 import org.openjfx.Units.DayPlan;
 import org.openjfx.Units.Schedule;
+import org.openjfx.commands.SwitchToHome;
 
 public class SchedulerPane extends GridPane {
     
@@ -70,7 +71,8 @@ public class SchedulerPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new HomePane(stage));
+                    SwitchToHome home = new SwitchToHome();
+                    home.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
