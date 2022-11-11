@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 
 
 import org.openjfx.Units.Employee;
+import org.openjfx.Units.Person;
 import org.openjfx.Units.CareWorkerAdapter;
 import java.io.*;
 import java.util.Random;
@@ -59,8 +60,8 @@ public class AddWorkerPane extends VBox {
                     pAddedLabel.setText("Worker added!");
 
                     // Building the Employee object. Requires an adapter to add it to careworkers.json
-                    Employee newEmp = new Employee(pfNameField.getText(),plNameField.getText(), idGenerator(), dobField.getText());
-                    CareWorkerAdapter.storeWorker(newEmp);
+                    Person newEmp = new Employee(pfNameField.getText(),plNameField.getText(), idGenerator(), dobField.getText());
+                    newEmp.store();
                     pAddedLabel.setText("Employee added!");
 
 

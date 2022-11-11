@@ -7,9 +7,9 @@ import org.json.simple.JSONObject;
 import java.util.LinkedList;
 
 
-public class PatientAdapter {
-
-    public static void storePatient(Patient p)
+public class PatientAdapter implements Adapter 
+{
+    public void store(Person p)
     {
         try {
             JSONParser parser = new JSONParser();
@@ -29,7 +29,7 @@ public class PatientAdapter {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    public static LinkedList<Patient> retrievePatients()
+    public static LinkedList<Patient> retrieve()
     {
         try {
             JSONParser parser = new JSONParser();

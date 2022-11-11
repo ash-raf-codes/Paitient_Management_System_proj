@@ -36,7 +36,7 @@ public class AddPatientPane extends VBox {
             public void handle(ActionEvent event) {
                 try {
                     Patient newpatient = new Patient(pfNameField.getText(), plNameField.getText(),"123456", dobField.getText(),"diagnosis");
-                    PatientAdapter.storePatient(newpatient);
+                    newpatient.store();
                     pAddedLabel.setText("Patient added!");
 
                 } catch (Exception e) { e.printStackTrace(); }

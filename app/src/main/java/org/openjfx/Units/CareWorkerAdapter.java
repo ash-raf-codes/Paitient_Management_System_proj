@@ -6,8 +6,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject; 
 import java.util.LinkedList;
 
-public class CareWorkerAdapter {
-    public static void storeWorker(Employee p)
+public class CareWorkerAdapter implements Adapter
+{
+    public void store(Person p)
     {
         try {
             JSONParser parser = new JSONParser();
