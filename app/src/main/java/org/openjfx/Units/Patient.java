@@ -13,7 +13,8 @@ public class Patient extends Person
         setDOB(dob);
         setDiagnosis(diagnosis);
         setSchedule(new Schedule());
-        setCareWorker(cw);
+        //setCareWorker(cw);
+        this.careWorker = null;
         setAdapter(new PatientAdapter());
     }
 
@@ -24,7 +25,7 @@ public class Patient extends Person
         setDOB(dob);
         setDiagnosis(diagnosis);
         setSchedule(new Schedule(this));
-        setCareWorker(new Employee("Bob","Smith","98765","1990-01-01"));
+        this.careWorker = new Employee.Builder("12345ABC").fn("Bob").ln("Doe").dob("2000-02-02").build();
         setAdapter(new PatientAdapter());
     }
 

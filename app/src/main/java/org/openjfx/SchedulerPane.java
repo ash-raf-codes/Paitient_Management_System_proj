@@ -23,7 +23,8 @@ public class SchedulerPane extends GridPane {
     public SchedulerPane(Stage stage) {
         // FOR DEMO/TESTING PURPOSES ONLY
         // Set up sample schedule
-        Activity spinClass = new Activity("Spin Class", LocalTime.of(10,15), LocalTime.of(11,0));
+        Activity spinClass = new Activity.Builder("Spin Class").start(LocalTime.of(10,15)).end(LocalTime.of(11,0)).build();
+        
         LinkedList<Activity> alist = new LinkedList<Activity>();
         alist.add(spinClass);
         DayPlan sampleDay = new DayPlan(alist);

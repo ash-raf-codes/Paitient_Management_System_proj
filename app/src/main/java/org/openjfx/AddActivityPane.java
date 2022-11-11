@@ -76,7 +76,7 @@ public class AddActivityPane extends VBox {
                     int endMins = Integer.parseInt(etFieldMins.getText());
                 
                     //I think this needs to be able to append to SchedulerPane.java
-                    Activity newAc = new Activity(acNameField.getText(),LocalTime.of(startHour,startMins),LocalTime.of(endHour,endMins)); 
+                    Activity newAc = new Activity.Builder(acNameField.getText()).start(LocalTime.of(startHour, startMins)).end(LocalTime.of(endHour, endMins)).build();
 
                 } catch (Exception e) { e.printStackTrace(); }
             }

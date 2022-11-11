@@ -10,28 +10,56 @@ public class Activity {
     private LocalTime startTime;
     private LocalTime endTime;
     
-    // This is the object class. It will be built using the AddActivityPane.java
-    public Activity(String nm, LocalTime strt, LocalTime end) 
-    {
-        setName(nm);
-        setStartTime(strt);
-        setEndTime(end);
-    }
+    
 
-    void setName (String newName) //These classes will be obsolete and will be removed once builder is set up
-    {
-        this.actName = newName;
-    }
+    public static class Builder {
+        //required
+        private final String nm;
+        private  LocalTime strt;
+        private  LocalTime end;
+    
+        public Builder(String nm) {
+          this.nm = nm;
+        }
+    
+        public Builder start(LocalTime start) {
+            strt = start;
+            return this;
+        }
+    
+        public Builder end(LocalTime et) {
+            end = et;
+            return this;
+        }
 
-    void setStartTime (LocalTime newstrt)//These classes will be obsolete and will be removed once builder is set up
-    {
-        this.startTime = newstrt;
-    }
+    
+        public Activity build() {
+          return new Activity(this);
+        }
+      }
 
-    void setEndTime (LocalTime newend)//These classes will be obsolete and will be removed once builder is set up
+      public Activity(Builder build) 
     {
-        this.endTime = newend;
+        actName = build.nm;
+        startTime = build.strt;
+        endTime = build.end;
     }
+    
+
+    // void setName (String newName) //These classes will be obsolete and will be removed once builder is set up
+    // {
+    //     this.actName = newName;
+    // }
+
+    // void setStartTime (LocalTime newstrt)//These classes will be obsolete and will be removed once builder is set up
+    // {
+    //     this.startTime = newstrt;
+    // }
+
+    // void setEndTime (LocalTime newend)//These classes will be obsolete and will be removed once builder is set up
+    // {
+    //     this.endTime = newend;
+    // }
 
     public String toString ()
     {

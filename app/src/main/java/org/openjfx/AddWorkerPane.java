@@ -60,7 +60,7 @@ public class AddWorkerPane extends VBox {
                     pAddedLabel.setText("Worker added!");
 
                     // Building the Employee object. Requires an adapter to add it to careworkers.json
-                    Person newEmp = new Employee(pfNameField.getText(),plNameField.getText(), idGenerator(), dobField.getText());
+                    Person newEmp = new Employee.Builder(idGenerator()).fn(pfNameField.getText()).ln(plNameField.getText()).dob(dobField.getText()).build();
                     newEmp.store();
                     pAddedLabel.setText("Employee added!");
 
