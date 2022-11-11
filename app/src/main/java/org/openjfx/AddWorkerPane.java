@@ -8,7 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+
+import org.openjfx.Units.Employee;
 import java.io.*;
+import java.util.Random;
+
 import org.json.simple.parser.*;
 import org.openjfx.commands.SwitchToHome;
 import org.json.simple.JSONArray; 
@@ -53,6 +57,10 @@ public class AddWorkerPane extends VBox {
                     pw.close(); 
                     pAddedLabel.setText("Worker added!");
 
+                    // Building the Employee object. Requires an adapter to add it to careworkers.json
+                    Employee newEmp = new Employee(pfNameField.getText(),plNameField.getText(), idGenerator(), dobField.getText());
+
+
                 } catch (Exception e) { e.printStackTrace(); }
             }
         });  // Note this weird }); for action handlers
@@ -66,6 +74,21 @@ public class AddWorkerPane extends VBox {
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
+    }
+    // Employee ID generator. Source: https://www.baeldung.com/java-random-string
+    public String idGenerator() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+    
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+          .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+          .limit(targetStringLength)
+          .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+          .toString();
+    
+        return generatedString;
     }
     
 }
