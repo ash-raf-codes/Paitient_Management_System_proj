@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import java.util.LinkedList;
 
 public class CareWorkerAdapter {
-    public static void storeWorker(Patient p)
+    public static void storeWorker(Employee p)
     {
         try {
             JSONParser parser = new JSONParser();
