@@ -14,6 +14,7 @@ public class Patient extends Person
         setDiagnosis(diagnosis);
         setSchedule(new Schedule());
         setCareWorker(cw);
+        setAdapter(new PatientAdapter());
     }
 
     public Patient(String fn, String ln, String id, String dob, String diagnosis)
@@ -24,6 +25,7 @@ public class Patient extends Person
         setDiagnosis(diagnosis);
         setSchedule(new Schedule(this));
         setCareWorker(new Employee("Bob","Smith","98765","1990-01-01"));
+        setAdapter(new PatientAdapter());
     }
 
     public String getHealthCardNumber()

@@ -1,7 +1,10 @@
 package org.openjfx.Units;
 
-public class Person 
+import java.util.LinkedList;
+
+public abstract class Person 
 {
+    private Adapter adapter;
     private String firstName;
     private String lastName;
     private String id;
@@ -41,5 +44,15 @@ public class Person
     public String getDob() 
     {
         return dob;
+    }
+
+    public void setAdapter(Adapter adapter) 
+    {
+        this.adapter = adapter;
+    }
+
+    public void store()
+    {
+        adapter.store(this);
     }
 }

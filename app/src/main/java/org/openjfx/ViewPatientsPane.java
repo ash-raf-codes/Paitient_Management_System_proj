@@ -34,7 +34,7 @@ public class ViewPatientsPane extends VBox {
         this.getChildren().addAll(welcomeLabel,pListLabel,clearButton,exitButton);
 
         try {
-            LinkedList<Patient> plist = PatientAdapter.retrievePatients();
+            LinkedList<Patient> plist = PatientAdapter.retrieve();
 
             var iterator = plist.iterator();
             String pListString = "";

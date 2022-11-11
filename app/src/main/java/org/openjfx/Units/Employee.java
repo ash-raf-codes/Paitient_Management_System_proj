@@ -12,6 +12,7 @@ public class Employee extends Person
         setEmployeeID(id);
         setDOB(dob);
         this.patients = new LinkedList<Patient>();
+        setAdapter(new CareWorkerAdapter());
     }
 
     public void setEmployeeID(String id)
