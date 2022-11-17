@@ -7,10 +7,14 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 
 import org.openjfx.commands.SwitchToHome;
 
+import java.util.LinkedList;
 import org.openjfx.Units.*;
+import java.io.*;
+
 
 public class AddPatientPane extends VBox {
     
@@ -24,10 +28,24 @@ public class AddPatientPane extends VBox {
         TextField pfNameField = new TextField("First Name");
         TextField plNameField = new TextField("Last Name");
         TextField dobField = new TextField("Date of Birth (yyyy-mm-dd)");
+        TextField idField = new TextField("Medical ID");
         Label pAddedLabel = new Label(" ");
         Button addPatientButton = new Button("Add Patient");
         Button exitButton = new Button("Exit without saving");
-        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,pAddedLabel,addPatientButton,exitButton);
+        
+        ComboBox comboBox = new ComboBox();
+
+        try {
+            LinkedList<Employee> plist = CareWorkerAdapter.retrieve();
+
+            var iterator = plist.iterator();
+            while (iterator.hasNext()) {
+                Employee cur = iterator.next();
+                comboBox.getItems().add(cur.getId() + ": " + cur.getLastName());
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+
+        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,idField,comboBox,pAddedLabel,addPatientButton,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -35,8 +53,10 @@ public class AddPatientPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Patient newpatient = new Patient(pfNameField.getText(), plNameField.getText(),"123456", dobField.getText(),"diagnosis");
+                    Patient newpatient = new Patient(pfNameField.getText(), plNameField.getText(),idField.getText(), dobField.getText());
                     newpatient.store();
+                    String[] empID = ((String)comboBox.getValue()).split(":");
+                    CareWorkerAdapter.addPatientToEmployee(empID[0], newpatient.getId());
                     pAddedLabel.setText("Patient added!");
 
                 } catch (Exception e) { e.printStackTrace(); }

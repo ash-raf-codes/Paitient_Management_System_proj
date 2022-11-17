@@ -20,6 +20,7 @@ public class PatientAdapter implements Adapter
             jo.put("FirstName", p.getFirstName()); 
             jo.put("LastName", p.getLastName()); 
             jo.put("DOB", p.getDob());
+            jo.put("ID", p.getId());
             pList.add(jo);
             
             FileWriter pw = new FileWriter("./src/main/resources/patients.json"); 
@@ -44,8 +45,12 @@ public class PatientAdapter implements Adapter
                 String[] fname  = parts[0].split(":");
                 String[] DOB  = parts[1].split(":");
                 String[] lname = parts[2].split(":");
+                String[] id = parts[3].split(":");
 
-                plist.add(new Patient(fname[1].replace("\"", ""), lname[1].replace("\"", "").replace("}", ""), "123456", DOB[1].replace("\"", ""), "diagnosis"));
+                plist.add(new Patient(fname[1].replace("\"", ""), 
+                                        lname[1].replace("\"", "").replace("}", ""),
+                                        id[1].replace("\"", "").replace("}", ""), 
+                                        DOB[1].replace("\"", "")));
             }
             return plist;
         } catch (Exception e) { 

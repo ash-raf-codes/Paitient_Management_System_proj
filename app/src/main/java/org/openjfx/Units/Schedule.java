@@ -8,7 +8,7 @@ public class Schedule
     public Schedule()
     {
         setPlan(new DayPlan[7]);
-        setPatient(new Patient("John","Doe","12345","1950-01-01","Old age"));
+        setPatient(new Patient("John","Doe","12345","1950-01-01"));
     }
 
     public Schedule(Patient p)

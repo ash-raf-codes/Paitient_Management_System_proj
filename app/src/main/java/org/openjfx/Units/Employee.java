@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Employee extends Person 
 {
-    private LinkedList<Employee> Employees;
+    private LinkedList<String> Patients;
 
     public static class Builder {
         //required
@@ -43,7 +43,7 @@ public class Employee extends Person
         setName(builder.fn, builder.ln);
         setID(builder.id);
         setDOB(builder.dob);
-        this.Employees = new LinkedList<Employee>();
+        this.Patients = new LinkedList<String>();
         setAdapter(new CareWorkerAdapter());
     }
 
@@ -53,23 +53,30 @@ public class Employee extends Person
     //     setID(id);
     // }
 
-    public void addPatient(Employee newEmp)
+    public void setPatientList(LinkedList<String> p)
     {
-        this.Employees.add(newEmp);
+      this.Patients = p;
+    }
+    
+    public void addPatient(String newPatient)
+    {
+        this.Patients.add(newPatient);
     }
 
-    public void removeEmployee(Employee empRemove)
+    public void removePatient(String pRemove)
     {
-        this.Employees.remove(empRemove);
+        this.Patients.remove(pRemove);
     }
 
-    public LinkedList<Employee> getEmpList()
+    public LinkedList<String> getPatientList()
     {
-        return this.Employees;
+        return this.Patients;
     }
 
     public String toString()
     {
-      return getId() + "\t\tFull name: " + getFirstName() + " " + getLastName() + ", Date of birth: " + getDob();
+      return getId() + "\t\tFull name: " + getFirstName() + " " + getLastName() 
+              + ", Date of birth: " + getDob()
+              + "\n\t\t\t\tPatient List: " + Patients;
     }
 }
