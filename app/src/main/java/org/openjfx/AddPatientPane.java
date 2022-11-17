@@ -1,7 +1,6 @@
 package org.openjfx;
 
 import javafx.stage.Stage;
-//import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,10 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.*;
-import org.json.simple.parser.*;
-import org.json.simple.JSONArray; 
-import org.json.simple.JSONObject; 
+import org.openjfx.commands.SwitchToHome;
+
+import org.openjfx.Units.*;
 
 public class AddPatientPane extends VBox {
     
@@ -37,21 +35,8 @@ public class AddPatientPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    JSONParser parser = new JSONParser();
-                    Object obj = parser.parse(new FileReader("patients.json"));
-                    JSONArray pList = (JSONArray)obj;
-                    
-                    JSONObject jo = new JSONObject();
-                    jo.put("firstName", pfNameField.getText()); 
-                    jo.put("lastName", plNameField.getText()); 
-                    jo.put("dob", dobField.getText());
-                    pList.add(jo);
-                    
-                    // writing JSON to file:"JSONExample.json" in cwd 
-                    FileWriter pw = new FileWriter("patients.json"); 
-                    pw.write(pList.toJSONString()); 
-                    pw.flush(); 
-                    pw.close(); 
+                    Patient newpatient = new Patient(pfNameField.getText(), plNameField.getText(),"123456", dobField.getText(),"diagnosis");
+                    newpatient.store();
                     pAddedLabel.setText("Patient added!");
 
                 } catch (Exception e) { e.printStackTrace(); }
@@ -62,7 +47,8 @@ public class AddPatientPane extends VBox {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    SceneSwitcher.sceneSwitch(stage, new HomePane(stage));
+                    SwitchToHome home = new SwitchToHome();
+                    home.execute(stage);
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers
