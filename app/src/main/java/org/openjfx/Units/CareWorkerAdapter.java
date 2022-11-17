@@ -29,10 +29,7 @@ public class CareWorkerAdapter implements Adapter
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    /* 
-    ** This method needs to be implemented properly**
-
-    public static LinkedList<Employee> retrieveEmployees()
+    public static LinkedList<Employee> retrieve()
     {
         try {
             JSONParser parser = new JSONParser();
@@ -47,10 +44,13 @@ public class CareWorkerAdapter implements Adapter
                 String[] fname  = parts[0].split(":");
                 String[] DOB  = parts[1].split(":");
                 String[] lname = parts[2].split(":");
+                String[] id = parts[3].split(":");
 
-                *** The following line needs to be formatted correctly ***
 
-                plist.add(new Patient(fname[1].replace("\"", ""), lname[1].replace("\"", "").replace("}", ""), "123456", DOB[1].replace("\"", ""), "diagnosis"));
+                plist.add(new Employee.Builder(id[1].replace("\"", "").replace("}", ""))
+                                        .fn(fname[1].replace("\"", ""))
+                                        .ln(lname[1].replace("\"", "").replace("}", ""))
+                                        .dob(DOB[1].replace("\"", "")).build());
             }
             return plist;
         } catch (Exception e) { 
@@ -59,5 +59,5 @@ public class CareWorkerAdapter implements Adapter
         }
         
     }
-    */
+
 }

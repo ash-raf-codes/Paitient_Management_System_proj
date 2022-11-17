@@ -10,8 +10,12 @@ import javafx.scene.control.Label;
 import java.io.*;
 
 import org.json.simple.parser.*;
+import org.openjfx.Units.CareWorkerAdapter;
 import org.openjfx.commands.SwitchToHome;
 import org.json.simple.JSONArray; 
+
+import java.util.LinkedList;
+import org.openjfx.Units.*;
 
 public class ViewWorkersPane extends VBox {
     
@@ -27,12 +31,10 @@ public class ViewWorkersPane extends VBox {
         Button exitButton = new Button("Exit");
         Button clearButton = new Button("Clear List [debug feature]");
         this.getChildren().addAll(welcomeLabel,pListLabel,clearButton,exitButton);
-
+        
         try {
-            JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("./src/main/resources/careworkers.json"));
-            JSONArray pList = (JSONArray)obj;
-            var iterator = pList.iterator();
+            LinkedList<Employee> plist = CareWorkerAdapter.retrieve();
+            var iterator = plist.iterator();
             String pListString = "";
             while (iterator.hasNext()) {
                 pListString = pListString + iterator.next().toString() + "\n";

@@ -4,20 +4,7 @@ import java.util.LinkedList;
 
 public class Employee extends Person 
 {
-    String fn;
-    String ln;
-    String id;
-    String dob;
     private LinkedList<Employee> Employees;
-
-    // public Employee(String fn, String ln, String id, String dob)
-    // {
-    //     setName(fn, ln);
-    //     setEmployeeID(id);
-    //     setDOB(dob);
-    //     this.Employees = new LinkedList<Employee>();
-    //     setAdapter(new CareWorkerAdapter());
-    // }
 
     public static class Builder {
         //required
@@ -53,10 +40,9 @@ public class Employee extends Person
 
       public Employee(Builder builder)
     {
-        fn = builder.fn;
-        ln = builder.ln;
-        id = builder.id;
-        dob = builder.dob;
+        setName(builder.fn, builder.ln);
+        setID(builder.id);
+        setDOB(builder.dob);
         this.Employees = new LinkedList<Employee>();
         setAdapter(new CareWorkerAdapter());
     }
@@ -80,5 +66,10 @@ public class Employee extends Person
     public LinkedList<Employee> getEmpList()
     {
         return this.Employees;
+    }
+
+    public String toString()
+    {
+      return getId() + "\t\tFull name: " + getFirstName() + " " + getLastName() + ", Date of birth: " + getDob();
     }
 }
