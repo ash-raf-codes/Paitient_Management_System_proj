@@ -7,13 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SwitchToAddPatient implements SceneSwitch {
-    private AddPatientPane newHome;
+    private AddPatientPane newPane;
 
     public void execute(Stage stage) {
-        newHome = new AddPatientPane(stage);
-        Scene homeScene = new Scene(newHome,MainApp.WIDTH,MainApp.HEIGHT);
+        newPane = new AddPatientPane(stage);
+        Scene newScene = new Scene(newPane,MainApp.WIDTH,MainApp.HEIGHT);
+        newScene.getStylesheets().add("./org/openjfx/styles.css");
         stage.setTitle(AddPatientPane.title);
-        stage.setScene(homeScene);
+        stage.setScene(newScene);
         stage.show();
     }
 }

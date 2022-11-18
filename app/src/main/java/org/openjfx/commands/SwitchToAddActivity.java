@@ -7,13 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SwitchToAddActivity implements SceneSwitch {
-    private AddActivityPane newHome;
+    private AddActivityPane newPane;
 
     public void execute(Stage stage) {
-        newHome = new AddActivityPane(stage);
-        Scene homeScene = new Scene(newHome,MainApp.WIDTH,MainApp.HEIGHT);
+        newPane = new AddActivityPane(stage);
+        Scene newScene = new Scene(newPane,MainApp.WIDTH,MainApp.HEIGHT);
+        newScene.getStylesheets().add("./org/openjfx/styles.css");
         stage.setTitle(AddActivityPane.title);
-        stage.setScene(homeScene);
+        stage.setScene(newScene);
         stage.show();
     }
 }

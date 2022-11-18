@@ -1,3 +1,12 @@
+.root {
+    background-clip: red;
+    background-color:red;
+    -fx-background-color: linear-gradient(to bottom, aliceblue 0%, cornflowerblue 100%);
+}
+
 .label {
-    -fx-text-fill: blue;
+    background-color: aliceblue;
+    -fx-text-fill: brown;
+    -fx-background-color: rgb(180, 223, 227);
+
 }

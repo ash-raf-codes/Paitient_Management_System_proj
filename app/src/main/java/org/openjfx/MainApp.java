@@ -1,8 +1,8 @@
 package org.openjfx;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.openjfx.commands.*;
 
 
 public class MainApp extends Application {
@@ -16,14 +16,8 @@ public class MainApp extends Application {
 
 
         // Set up home scene
-        HomePane homePane = new HomePane(stage);
-        Scene homeScene = new Scene(homePane,WIDTH,HEIGHT);
-        homeScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-       
-        // Launches stage (window)
-        stage.setTitle("Rementi: Patient and Staff Scheduler Home Screen");
-        stage.setScene(homeScene);
-        stage.show();
+        SwitchToHome home = new SwitchToHome();
+            home.execute(stage);
 
     }
 
