@@ -22,24 +22,36 @@ public class HomePane extends GridPane {
         Label welcomeLabel = new Label("Welcome to Rementi care home management system!");
         this.add(welcomeLabel,0,0,3,1);
 
+        // Column 1: Patient Management features
+        Label patientCatLabel = new Label("Patient Management");
+        this.add(patientCatLabel,0,1);
         Button addPatientButton = new Button("Add Patient");
-        this.add(addPatientButton,0,1);
+        this.add(addPatientButton,0,2);
+        Button viewPatientsButton = new Button("View Patient List");
+        this.add(viewPatientsButton,0,3);
         Button removePatientButton = new Button("Remove Patient");
         removePatientButton.setStyle("-fx-background-color: coral");
-        this.add(removePatientButton,1,1);
-        Button viewPatientsButton = new Button("View Patient List");
-        this.add(viewPatientsButton,2,1);
+        this.add(removePatientButton,0,4);
 
+        // Column 2: Worker Management features
+        Label workerCatLabel = new Label("Worker Management");
+        this.add(workerCatLabel,1,1);
         Button addWorkerButton = new Button("Add Care Worker");
-        this.add(addWorkerButton,0,2);
+        this.add(addWorkerButton,1,2);
         Button viewWorkersButton = new Button("View Care Worker List");
-        this.add(viewWorkersButton,1,2);
+        this.add(viewWorkersButton,1,3);
 
+        // Column 3: Activity Management
+        Label activityCatLabel = new Label("Activity Management");
+        this.add(activityCatLabel,2,1);
         Button addActivityButton = new Button("Add New Type of Activity");
-        this.add(addActivityButton,0,3);
+        this.add(addActivityButton,2,2);
 
+        // Column 4: Schedule Management
+        Label schedulerCatLabel = new Label("Schedule Management");
+        this.add(schedulerCatLabel,3,1);
         Button schedulerButton = new Button("View and Edit Patient Schedules");
-        this.add(schedulerButton,0,4);
+        this.add(schedulerButton,3,2);
 
         //this.getChildren().addAll(welcomeLabel,addPatientButton,viewPatientsButton, addActivityButton);
 

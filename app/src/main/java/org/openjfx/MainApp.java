@@ -7,8 +7,8 @@ import org.openjfx.commands.*;
 
 public class MainApp extends Application {
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 400;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
 
     @Override
     public void start(Stage stage) throws Exception {
