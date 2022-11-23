@@ -1,6 +1,8 @@
 package org.openjfx;
 
 import org.openjfx.Units.Activity;
+import org.openjfx.Units.PatientAdapter;
+
 import java.time.LocalTime;
 import javafx.stage.Stage;
 //import javafx.scene.Scene;
@@ -10,12 +12,16 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 
 import java.io.*;
 import org.json.simple.parser.*;
 import org.openjfx.commands.SwitchToHome;
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
+
+import java.util.LinkedList;
+import org.openjfx.Units.*;
 
 
 // This is the builder for the Activity.java and employs a builder pattern
@@ -28,8 +34,8 @@ public class AddActivityPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Welcome to the 'Add activity' wizard.");
-        TextField paFNameField = new TextField("Patient First Name");
-        TextField paLNameField = new TextField("Patient Last Name");
+        //TextField paFNameField = new TextField("Patient First Name");
+        //TextField paLNameField = new TextField("Patient Last Name");
         TextField acNameField = new TextField("Activity Name");
         TextField dtField = new TextField("Date(yyyy-mm-dd)");
         TextField stFieldHr = new TextField("Start hour");
@@ -39,7 +45,19 @@ public class AddActivityPane extends VBox {
         Label pAddedLabel = new Label(" ");
         Button addActivity = new Button("Schedule activity");
         Button exitButton = new Button("Exit without saving");
-        this.getChildren().addAll(welcomeLabel,paFNameField,paLNameField,acNameField,dtField,pAddedLabel,stFieldHr,stFieldMins,etFieldHr,etFieldMins,addActivity,exitButton);
+        ComboBox comboBox = new ComboBox();
+
+        try {
+            LinkedList<Patient> plist = PatientAdapter.retrieve();
+
+            var iterator = plist.iterator();
+            while (iterator.hasNext()) {
+                Patient cur = iterator.next();
+                comboBox.getItems().add(cur.getId() + ": " + cur.getLastName());
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+
+        this.getChildren().addAll(welcomeLabel,comboBox,acNameField,dtField,pAddedLabel,stFieldHr,stFieldMins,etFieldHr,etFieldMins,addActivity,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -52,8 +70,8 @@ public class AddActivityPane extends VBox {
                     JSONArray pList = (JSONArray)obj;
                     
                     JSONObject jo = new JSONObject();
-                    jo.put("paFName", paFNameField.getText());
-                    jo.put("paLName", paLNameField.getText()); 
+                    String pID[] = ((String)comboBox.getValue()).split(":");
+                    jo.put("patientID", pID[0]);
                     jo.put("acName", acNameField.getText()); 
                     jo.put("dt", dtField.getText());
                     jo.put("sthr", stFieldHr.getText());
@@ -76,7 +94,7 @@ public class AddActivityPane extends VBox {
                     int endMins = Integer.parseInt(etFieldMins.getText());
                 
                     //I think this needs to be able to append to SchedulerPane.java
-                    Activity newAc = new Activity.Builder(acNameField.getText()).start(LocalTime.of(startHour, startMins)).end(LocalTime.of(endHour, endMins)).build();
+                    Activity newAc = new Activity.Builder(acNameField.getText()).start(startHour, startMins).end(endHour, endMins).build();
 
                 } catch (Exception e) { e.printStackTrace(); }
             }
