@@ -19,7 +19,7 @@ public class Patient extends Person
         setName(fn, ln);
         setHealthCardNumber(id);
         setDOB(dob);
-        setSchedule(new Schedule(this));
+        //setSchedule(new Schedule(this));
         setAdapter(new PatientAdapter());
     }
 

@@ -67,11 +67,40 @@ public class SchedulerPane extends GridPane {
             this.add(schedLabel,i,2);
         }
         */
+        this.setVgap(20);
+        this.setHgap(10);
+
+        Label welcomeLabel = new Label("Welcome to Rementi schedule management system!");
+        this.add(welcomeLabel,0,0,7,1);
+
+        Label mondayLabel = new Label("Monday");
+        this.add(mondayLabel,0,3);
+        Label tuesdayLabel = new Label("Tuesday");
+        this.add(tuesdayLabel,1,3);
+        Label wednesdayLabel = new Label("Wednesday");
+        this.add(wednesdayLabel,2,3);
+        Label thursdayLabel = new Label("Thursday");
+        this.add(thursdayLabel,3,3);
+        Label fridayLabel = new Label("Friday");
+        this.add(fridayLabel,4,3);
+        Label saturdayLabel = new Label("Saturday");
+        this.add(saturdayLabel,5,3);
+        Label sundayLabel = new Label("Sunday");
+        this.add(sundayLabel,6,3);
+
+        //Initialize label for activities
+        Label[] activityLabel = new Label[7];
+        for(int i=0; i<7; i++)
+        {
+            activityLabel[i] = new Label("");
+            this.add(activityLabel[i],i,4);
+        }
+
         Label scheduleLabel = new Label(" ");
         this.add(scheduleLabel, 0, 2);
 
         Button view = new Button("View Schedule");
-        this.add(view, 5, 1);
+        this.add(view, 1, 1);
         
         ComboBox comboBox = new ComboBox();
         try {
@@ -94,6 +123,11 @@ public class SchedulerPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    if(comboBox.getValue()==null)
+                    {
+                        scheduleLabel.setText("Please select employee");
+                        return;
+                    }
                     String[] empID = ((String)comboBox.getValue()).split(":");
                     LinkedList<Employee> empList = CareWorkerAdapter.retrieve();
                     LinkedList<String> pList = new LinkedList<String>();
@@ -106,6 +140,7 @@ public class SchedulerPane extends GridPane {
                     }
                     String toPrint = "";
                     LinkedList<Activity> allAct = ActivityAdapter.retrieve();
+                    Schedule sched = new Schedule();
                     for(int i=0; i<pList.size(); i++)
                     {
                         toPrint = toPrint + pList.get(i) + "\n";
@@ -113,12 +148,16 @@ public class SchedulerPane extends GridPane {
                         {
                             if(pList.get(i).equals(allAct.get(j).getPatientID()))
                             {
+                                sched.addToPlan(allAct.get(j));
                                 toPrint = toPrint + allAct.get(j).toString();
                             }
                         }
 
                     }
-                    scheduleLabel.setText(toPrint);
+                    //scheduleLabel.setText(toPrint);
+                    for (int i=0; i<7; i++){
+                        activityLabel[i].setText(sched.getDayPlan(i).toString());
+                    }
 
                 } catch (Exception e) { e.printStackTrace(); }
             }

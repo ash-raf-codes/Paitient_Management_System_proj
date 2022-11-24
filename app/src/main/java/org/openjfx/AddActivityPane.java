@@ -34,10 +34,7 @@ public class AddActivityPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Welcome to the 'Add activity' wizard.");
-        //TextField paFNameField = new TextField("Patient First Name");
-        //TextField paLNameField = new TextField("Patient Last Name");
         TextField acNameField = new TextField("Activity Name");
-        TextField dtField = new TextField("Date(yyyy-mm-dd)");
         TextField stFieldHr = new TextField("Start hour");
         TextField stFieldMins = new TextField("Start min");
         TextField etFieldHr = new TextField("End hour");
@@ -57,7 +54,19 @@ public class AddActivityPane extends VBox {
             }
         } catch (Exception e) { e.printStackTrace(); }
 
-        this.getChildren().addAll(welcomeLabel,comboBox,acNameField,dtField,pAddedLabel,stFieldHr,stFieldMins,etFieldHr,etFieldMins,addActivity,exitButton);
+        ComboBox dateField = new ComboBox();
+        try {
+            dateField.getItems().add("Monday");
+            dateField.getItems().add("Tuesday");
+            dateField.getItems().add("Wednesday");
+            dateField.getItems().add("Thursday");
+            dateField.getItems().add("Friday");
+            dateField.getItems().add("Saturday");
+            dateField.getItems().add("Sunday");
+        } catch (Exception e) { e.printStackTrace(); }
+
+
+        this.getChildren().addAll(welcomeLabel,comboBox,acNameField,dateField,pAddedLabel,stFieldHr,stFieldMins,etFieldHr,etFieldMins,addActivity,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -73,7 +82,7 @@ public class AddActivityPane extends VBox {
                     String pID[] = ((String)comboBox.getValue()).split(":");
                     jo.put("patientID", pID[0]);
                     jo.put("acName", acNameField.getText()); 
-                    jo.put("dt", dtField.getText());
+                    jo.put("dt", (String)dateField.getValue());
                     jo.put("sthr", stFieldHr.getText());
                     jo.put("stmin", stFieldMins.getText());
                     jo.put("ethr", stFieldHr.getText());

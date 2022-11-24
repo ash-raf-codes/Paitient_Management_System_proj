@@ -73,7 +73,11 @@ public class Activity {
     {
       return patient;
     }
-    
+
+    public String getDate()
+    {
+      return date;
+    }
 
     // void setName (String newName) //These classes will be obsolete and will be removed once builder is set up
     // {
