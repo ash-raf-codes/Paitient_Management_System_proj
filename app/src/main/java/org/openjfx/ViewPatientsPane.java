@@ -26,8 +26,10 @@ public class ViewPatientsPane extends VBox {
     public ViewPatientsPane(Stage stage) {
         // Set up screen elements
         this.setSpacing(10);
-        Label welcomeLabel = new Label("Current Patients:");
+        Label welcomeLabel = new Label("Current Patients");
+        welcomeLabel.setId("welcomeLabel");
         Label pListLabel = new Label("");
+        pListLabel.setStyle("-fx-font-weight: normal; -fx-text-size: 14px; -fx-text-fill: black");
         Label clearedLabel = new Label("");
         Button exitButton = new Button("Exit");
         Button clearButton = new Button("Clear List [debug feature]");

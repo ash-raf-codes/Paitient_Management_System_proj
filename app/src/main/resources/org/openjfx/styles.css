@@ -5,8 +5,23 @@
 }
 
 .label {
-    background-color: aliceblue;
     -fx-text-fill: brown;
-    -fx-background-color: rgb(180, 223, 227);
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
 
+.button {
+    -fx-min-width: 150px;
+}
+
+#centeredPane {
+    -fx-alignment: center;
+    padding: 10;
+    -fx-padding: 10;
+}
+
+#welcomeLabel {
+    font-size: 20px;
+    -fx-font-size: 20px;
+    -fx-text-align: center;
 }
