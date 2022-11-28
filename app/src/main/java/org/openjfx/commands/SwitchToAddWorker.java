@@ -7,13 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SwitchToAddWorker implements SceneSwitch {
-    private AddWorkerPane newHome;
+    private AddWorkerPane newPane;
 
     public void execute(Stage stage) {
-        newHome = new AddWorkerPane(stage);
-        Scene homeScene = new Scene(newHome,MainApp.WIDTH,MainApp.HEIGHT);
+        newPane = new AddWorkerPane(stage);
+        Scene newScene = new Scene(newPane,MainApp.WIDTH,MainApp.HEIGHT);
+        newScene.getStylesheets().add("./org/openjfx/styles.css");
         stage.setTitle(AddWorkerPane.title);
-        stage.setScene(homeScene);
+        stage.setScene(newScene);
         stage.show();
     }
 }

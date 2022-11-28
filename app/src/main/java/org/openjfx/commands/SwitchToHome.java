@@ -11,9 +11,10 @@ public class SwitchToHome implements SceneSwitch {
 
     public void execute(Stage stage) {
         newHome = new HomePane(stage);
-        Scene homeScene = new Scene(newHome,MainApp.WIDTH,MainApp.HEIGHT);
+        Scene newScene = new Scene(newHome,MainApp.WIDTH,MainApp.HEIGHT);
+        newScene.getStylesheets().add("./org/openjfx/styles.css");
         stage.setTitle(HomePane.title);
-        stage.setScene(homeScene);
+        stage.setScene(newScene);
         stage.show();
     }
 }

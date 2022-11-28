@@ -7,13 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SwitchToScheduler implements SceneSwitch {
-    private SchedulerPane newHome;
+    private SchedulerPane newPane;
 
     public void execute(Stage stage) {
-        newHome = new SchedulerPane(stage);
-        Scene homeScene = new Scene(newHome,MainApp.WIDTH,MainApp.HEIGHT);
+        newPane = new SchedulerPane(stage);
+        Scene newScene = new Scene(newPane,MainApp.WIDTH,MainApp.HEIGHT);
+        newScene.getStylesheets().add("./org/openjfx/styles.css");
         stage.setTitle(SchedulerPane.title);
-        stage.setScene(homeScene);
+        stage.setScene(newScene);
         stage.show();
     }
 }

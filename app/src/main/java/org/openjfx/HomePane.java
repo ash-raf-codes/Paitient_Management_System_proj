@@ -2,6 +2,8 @@ package org.openjfx;
 
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -14,32 +16,52 @@ public class HomePane extends GridPane {
     public static final String title = "Rementi: Home";
 
     public HomePane(Stage stage) {
-        // Set spacing attributes
+        // Set attributes
         this.setVgap(20);
-        this.setHgap(10);
+        this.setHgap(20);
+        //this.setStyle("-fx-grid-lines-visible: true");
 
         // Set up screen elements
         Label welcomeLabel = new Label("Welcome to Rementi care home management system!");
+        welcomeLabel.setId("welcomeLabel");
         this.add(welcomeLabel,0,0,3,1);
 
+        // Column 1: Patient Management features
+        VBox pmPane = new VBox();
+        pmPane.setSpacing(20);
+        this.add(pmPane,0,1,1,4);
+        Label patientCatLabel = new Label("Patient Management");
         Button addPatientButton = new Button("Add Patient");
-        this.add(addPatientButton,0,1);
+        Button viewPatientsButton = new Button("View Patient List");
         Button removePatientButton = new Button("Remove Patient");
         removePatientButton.setStyle("-fx-background-color: coral");
-        this.add(removePatientButton,1,1);
-        Button viewPatientsButton = new Button("View Patient List");
-        this.add(viewPatientsButton,2,1);
+        pmPane.getChildren().addAll(patientCatLabel,addPatientButton,viewPatientsButton,removePatientButton);
 
+        // Column 2: Worker Management features
+        VBox wmPane = new VBox();
+        wmPane.setSpacing(20);
+        this.add(wmPane,1,1,1,3);
+        Label workerCatLabel = new Label("Worker Management");
         Button addWorkerButton = new Button("Add Care Worker");
-        this.add(addWorkerButton,0,2);
         Button viewWorkersButton = new Button("View Care Worker List");
-        this.add(viewWorkersButton,1,2);
+        wmPane.getChildren().addAll(workerCatLabel,addWorkerButton,viewWorkersButton);
 
+        // Column 3: Activity Management
+        Label activityCatLabel = new Label("Activity Management");
+        this.add(activityCatLabel,2,1);
         Button addActivityButton = new Button("Add New Type of Activity");
-        this.add(addActivityButton,0,3);
+        this.add(addActivityButton,2,2);
 
+        // Column 4: Schedule Management
+        Label schedulerCatLabel = new Label("Schedule Management");
+        this.add(schedulerCatLabel,3,1);
         Button schedulerButton = new Button("View and Edit Patient Schedules");
-        this.add(schedulerButton,0,4);
+        this.add(schedulerButton,3,2);
+
+        // Quit button
+        Button quitButton = new Button("Quit");
+        quitButton.setStyle("-fx-background-color: violet; -fx-font-weight: bold");
+        this.add(quitButton,0,6);
 
         //this.getChildren().addAll(welcomeLabel,addPatientButton,viewPatientsButton, addActivityButton);
 
@@ -100,6 +122,15 @@ public class HomePane extends GridPane {
                 try {
                     SwitchToScheduler scheduler = new SwitchToScheduler();
                     scheduler.execute(stage);
+                } catch (Exception e) { return; }
+            }
+        });  // Note this weird }); for action handlers
+
+        quitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Platform.exit();
                 } catch (Exception e) { return; }
             }
         });  // Note this weird }); for action handlers

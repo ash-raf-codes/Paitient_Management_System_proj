@@ -1,6 +1,7 @@
 package org.openjfx;
 
 import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,17 +19,32 @@ import java.util.Random;
 import org.openjfx.commands.SwitchToHome;
 
 
-public class AddWorkerPane extends VBox {
+public class AddWorkerPane extends GridPane {
     
     // The title that should always be on the window (stage) when this pane is active
     public static final String title = "Rementi: Add Worker";
 
     public AddWorkerPane(Stage stage) {
         // Set up screen elements
-        this.setSpacing(10);
-        Label welcomeLabel = new Label("Welcome to the 'add care worker' wizard.");
-        TextField pfNameField = new TextField("First Name");
-        TextField plNameField = new TextField("Last Name");
+        this.setHgap(10);
+        this.setVgap(10);
+        
+        Label welcomeLabel = new Label("Add Care Worker");
+        welcomeLabel.setId("welcomeLabel");
+        this.add(welcomeLabel,0,0,3,1);
+
+        Label wfnLabel = new Label("First Name");
+        this.add(wfnLabel,0,1);
+        TextField wfNameField = new TextField("First Name");
+        this.add(wfNameField,1,1);
+
+        Label wlnLabel = new Label("Last Name");
+        this.add(wlnLabel,0,2);
+        TextField wlNameField = new TextField("Last Name");
+        this.add(wlNameField,1,2);
+
+        Label dobLabel = new Label("Date of Birth");
+        this.add(dobLabel,0,3);
         TextField dobField = new TextField("Date of Birth (yyyy-mm-dd)");
         TextField employeeIDField = new TextField("Employee ID");
         Label pAddedLabel = new Label(" ");
