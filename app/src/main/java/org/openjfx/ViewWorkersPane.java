@@ -26,11 +26,12 @@ public class ViewWorkersPane extends VBox {
         // Set up screen elements
         this.setSpacing(10);
         Label welcomeLabel = new Label("Current Care Workers:");
-        Label pListLabel = new Label("");
+        Label wListLabel = new Label("");
+        wListLabel.setStyle("-fx-font-weight: normal; -fx-text-size: 14px; -fx-text-fill: black");
         Label clearedLabel = new Label("");
         Button exitButton = new Button("Exit");
         Button clearButton = new Button("Clear List [debug feature]");
-        this.getChildren().addAll(welcomeLabel,pListLabel,clearButton,exitButton);
+        this.getChildren().addAll(welcomeLabel,wListLabel,clearButton,exitButton);
         
         try {
             LinkedList<Employee> plist = CareWorkerAdapter.retrieve();
@@ -39,7 +40,7 @@ public class ViewWorkersPane extends VBox {
             while (iterator.hasNext()) {
                 pListString = pListString + iterator.next().toString() + "\n";
             }
-            pListLabel.setText(pListString);
+            wListLabel.setText(pListString);
         } catch (Exception e) { e.printStackTrace(); }
         
         // Action handler make thing happen when button click
@@ -61,7 +62,7 @@ public class ViewWorkersPane extends VBox {
                     pw.write("[]"); 
                     pw.flush(); 
                     pw.close(); 
-                    pListLabel.setText("");
+                    wListLabel.setText("");
                     clearedLabel.setText("List cleared");
 
                 } catch (Exception e) { e.printStackTrace(); }

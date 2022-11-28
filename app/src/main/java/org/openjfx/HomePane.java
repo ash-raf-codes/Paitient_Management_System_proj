@@ -58,10 +58,12 @@ public class HomePane extends GridPane {
         Button schedulerButton = new Button("View and Edit Patient Schedules");
         this.add(schedulerButton,3,2);
 
-        // Quit button
+        // Quit button & error report field
         Button quitButton = new Button("Quit");
         quitButton.setStyle("-fx-background-color: violet; -fx-font-weight: bold");
         this.add(quitButton,0,6);
+        Label errorLabel = new Label("");
+        this.add(errorLabel,0,7,4,1);
 
         //this.getChildren().addAll(welcomeLabel,addPatientButton,viewPatientsButton, addActivityButton);
 
@@ -122,7 +124,9 @@ public class HomePane extends GridPane {
                 try {
                     SwitchToScheduler scheduler = new SwitchToScheduler();
                     scheduler.execute(stage);
-                } catch (Exception e) { return; }
+                } catch (Exception e) { 
+                    errorLabel.setText("Error entering Scheduler");
+                    return; }
             }
         });  // Note this weird }); for action handlers
 

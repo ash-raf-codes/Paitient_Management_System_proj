@@ -46,11 +46,19 @@ public class AddWorkerPane extends GridPane {
         Label dobLabel = new Label("Date of Birth");
         this.add(dobLabel,0,3);
         TextField dobField = new TextField("Date of Birth (yyyy-mm-dd)");
+        this.add(dobField,1,3);
+
+        Label eIDLabel = new Label("Employee ID");
+        this.add(eIDLabel,0,4);
         TextField employeeIDField = new TextField("Employee ID");
+        this.add(employeeIDField,1,4);
         Label pAddedLabel = new Label(" ");
+        this.add(pAddedLabel,0,5);
         Button addWorkerButton = new Button("Add Care Worker");
+        this.add(addWorkerButton,0,6);
         Button exitButton = new Button("Exit");
-        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,employeeIDField,pAddedLabel,addWorkerButton,exitButton);
+        this.add(exitButton,0,7);
+        //this.getChildren().addAll(welcomeLabel,wfNameField,wlNameField,dobField,employeeIDField,pAddedLabel,addWorkerButton,exitButton);
         
         // Action handler make thing happen when button click
 
@@ -59,7 +67,7 @@ public class AddWorkerPane extends GridPane {
             public void handle(ActionEvent event) {
                 try {
                     // Building the Employee object. Requires an adapter to add it to careworkers.json
-                    Person newEmp = new Employee.Builder(employeeIDField.getText()).fn(pfNameField.getText()).ln(plNameField.getText()).dob(dobField.getText()).build();
+                    Person newEmp = new Employee.Builder(employeeIDField.getText()).fn(wfNameField.getText()).ln(wlNameField.getText()).dob(dobField.getText()).build();
                     newEmp.store();
                     pAddedLabel.setText("Employee added!");
 

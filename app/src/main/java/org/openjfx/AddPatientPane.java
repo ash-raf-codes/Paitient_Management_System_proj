@@ -44,14 +44,16 @@ public class AddPatientPane extends GridPane {
         Label dobLabel = new Label("Date of Birth");
         this.add(dobLabel,0,3);
         TextField dobField = new TextField("Date of Birth (yyyy-mm-dd)");
-        TextField idField = new TextField("Medical ID");
-        Label pAddedLabel = new Label(" ");
-        this.add(pAddedLabel,0,4);
-        Button addPatientButton = new Button("Add Patient");
-        Button exitButton = new Button("Exit without saving");
-        
-        ComboBox comboBox = new ComboBox();
+        this.add(dobField,1,3);
 
+        Label idLabel = new Label("Medical ID");
+        this.add(idLabel,0,4);
+        TextField idField = new TextField("Medical ID");
+        this.add(idField,1,4);
+
+        Label cwLabel = new Label("Patient's care worker");
+        this.add(cwLabel,0,5);
+        ComboBox comboBox = new ComboBox();
         try {
             LinkedList<Employee> plist = CareWorkerAdapter.retrieve();
 
@@ -61,8 +63,15 @@ public class AddPatientPane extends GridPane {
                 comboBox.getItems().add(cur.getId() + ": " + cur.getLastName());
             }
         } catch (Exception e) { e.printStackTrace(); }
+        this.add(comboBox,1,5);
 
-        this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,idField,comboBox,pAddedLabel,addPatientButton,exitButton);
+        Label pAddedLabel = new Label(" ");
+        this.add(pAddedLabel,0,6);
+        Button addPatientButton = new Button("Add Patient");
+        this.add(addPatientButton,0,7);
+        Button exitButton = new Button("Exit");
+        this.add(exitButton,0,8);
+        //this.getChildren().addAll(welcomeLabel,pfNameField,plNameField,dobField,idField,comboBox,pAddedLabel,addPatientButton,exitButton);
         
         // Action handler make thing happen when button click
 

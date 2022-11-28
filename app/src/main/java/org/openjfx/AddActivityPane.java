@@ -41,7 +41,7 @@ public class AddActivityPane extends VBox {
         TextField etFieldMins = new TextField("End min");
         Label pAddedLabel = new Label(" ");
         Button addActivity = new Button("Schedule activity");
-        Button exitButton = new Button("Exit without saving");
+        Button exitButton = new Button("Exit");
         ComboBox comboBox = new ComboBox();
 
         try {

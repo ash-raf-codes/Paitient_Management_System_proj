@@ -70,7 +70,7 @@ public class SchedulerPane extends GridPane {
         this.setVgap(20);
         this.setHgap(10);
 
-        Label welcomeLabel = new Label("Welcome to Rementi schedule management system!");
+        Label welcomeLabel = new Label("Scheduler Tool");
         this.add(welcomeLabel,0,0,7,1);
 
         Label mondayLabel = new Label("Monday");
@@ -93,6 +93,7 @@ public class SchedulerPane extends GridPane {
         for(int i=0; i<7; i++)
         {
             activityLabel[i] = new Label("");
+            activityLabel[i].setStyle("-fx-font-weight: normal; -fx-text-size: 14px; -fx-text-fill: black");
             this.add(activityLabel[i],i,4);
         }
 
