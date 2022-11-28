@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 
 import java.time.LocalTime;
 import java.util.LinkedList;
@@ -15,12 +16,15 @@ import org.openjfx.Units.DayPlan;
 import org.openjfx.Units.Schedule;
 import org.openjfx.commands.SwitchToHome;
 
+import org.openjfx.Units.*;
+
 public class SchedulerPane extends GridPane {
     
     // The title that should always be on the window (stage) when this pane is active
     public static final String title = "Rementi: Scheduler";
 
     public SchedulerPane(Stage stage) {
+        /*
         // FOR DEMO/TESTING PURPOSES ONLY
         // Set up sample schedule
         Activity spinClass = new Activity.Builder("Spin Class").start(LocalTime.of(10,15)).end(LocalTime.of(11,0)).build();
@@ -62,10 +66,103 @@ public class SchedulerPane extends GridPane {
             Label schedLabel = new Label(sampleSched.getDayPlan(i).toString());
             this.add(schedLabel,i,2);
         }
+        */
+        this.setVgap(20);
+        this.setHgap(10);
+
+        Label welcomeLabel = new Label("Welcome to Rementi schedule management system!");
+        this.add(welcomeLabel,0,0,7,1);
+
+        Label mondayLabel = new Label("Monday");
+        this.add(mondayLabel,0,3);
+        Label tuesdayLabel = new Label("Tuesday");
+        this.add(tuesdayLabel,1,3);
+        Label wednesdayLabel = new Label("Wednesday");
+        this.add(wednesdayLabel,2,3);
+        Label thursdayLabel = new Label("Thursday");
+        this.add(thursdayLabel,3,3);
+        Label fridayLabel = new Label("Friday");
+        this.add(fridayLabel,4,3);
+        Label saturdayLabel = new Label("Saturday");
+        this.add(saturdayLabel,5,3);
+        Label sundayLabel = new Label("Sunday");
+        this.add(sundayLabel,6,3);
+
+        //Initialize label for activities
+        Label[] activityLabel = new Label[7];
+        for(int i=0; i<7; i++)
+        {
+            activityLabel[i] = new Label("");
+            this.add(activityLabel[i],i,4);
+        }
+
+        Label scheduleLabel = new Label(" ");
+        this.add(scheduleLabel, 0, 2);
+
+        Button view = new Button("View Schedule");
+        this.add(view, 1, 1);
+        
+        ComboBox comboBox = new ComboBox();
+        try {
+            LinkedList<Employee> plist = CareWorkerAdapter.retrieve();
+
+            var iterator = plist.iterator();
+            while (iterator.hasNext()) {
+                Employee cur = iterator.next();
+                comboBox.getItems().add(cur.getId() + ": " + cur.getLastName());
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        this.add(comboBox, 0, 1);
 
         // Set up exit button
         Button exitButton = new Button("Exit");
         this.add(exitButton,0,7);
+
+
+        view.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    if(comboBox.getValue()==null)
+                    {
+                        scheduleLabel.setText("Please select employee");
+                        return;
+                    }
+                    String[] empID = ((String)comboBox.getValue()).split(":");
+                    LinkedList<Employee> empList = CareWorkerAdapter.retrieve();
+                    LinkedList<String> pList = new LinkedList<String>();
+                    for(int i=0; i<empList.size(); i++)
+                    {
+                        if(empList.get(i).getId().equals(empID[0]))
+                        {
+                            pList = empList.get(i).getPatientList();
+                        }
+                    }
+                    String toPrint = "";
+                    LinkedList<Activity> allAct = ActivityAdapter.retrieve();
+                    Schedule sched = new Schedule();
+                    for(int i=0; i<pList.size(); i++)
+                    {
+                        toPrint = toPrint + pList.get(i) + "\n";
+                        for(int j=0; j<allAct.size(); j++)
+                        {
+                            if(pList.get(i).equals(allAct.get(j).getPatientID()))
+                            {
+                                sched.addToPlan(allAct.get(j));
+                                toPrint = toPrint + allAct.get(j).toString();
+                            }
+                        }
+
+                    }
+                    //scheduleLabel.setText(toPrint);
+                    for (int i=0; i<7; i++){
+                        activityLabel[i].setText(sched.getDayPlan(i).toString());
+                    }
+
+                } catch (Exception e) { e.printStackTrace(); }
+            }
+        });  // Note this weird }); for action handlers
+        
 
         // Action handler make thing happen when button click
         exitButton.setOnAction(new EventHandler<ActionEvent>() {

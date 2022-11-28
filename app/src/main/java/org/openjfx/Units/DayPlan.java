@@ -6,6 +6,11 @@ public class DayPlan {
 
     private LinkedList<Activity> activityList;
 
+    public DayPlan()
+    {
+        setAList(new LinkedList<Activity>());
+    }
+
     public DayPlan (LinkedList<Activity> alist)
     {
         setAList(alist);

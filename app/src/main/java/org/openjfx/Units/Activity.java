@@ -7,29 +7,49 @@ public class Activity {
     private String actName;
     //private String firstName;
     //private String lastName;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private int startTimeh;
+    private int startTimem;
+    private int endTimeh;
+    private int endTimem;
+    private String patient;
+    private String date;
     
     
 
     public static class Builder {
         //required
         private final String nm;
-        private  LocalTime strt;
-        private  LocalTime end;
+        private  int strth;
+        private  int strtm;
+        private  int endh;
+        private  int endm;
+        private String p;
+        private String d;
     
         public Builder(String nm) {
           this.nm = nm;
         }
     
-        public Builder start(LocalTime start) {
-            strt = start;
+        public Builder start(int hour, int min) {
+            strth = hour;
+            strth = min;
             return this;
         }
     
-        public Builder end(LocalTime et) {
-            end = et;
+        public Builder end(int hour, int min) {
+            endh = hour;
+            endm = min;
             return this;
+        }
+
+        public Builder patient(String pt) {
+          p = pt;
+          return this;
+        }
+
+        public Builder date(String dt) {
+          d = dt;
+          return this;
         }
 
     
@@ -41,10 +61,23 @@ public class Activity {
       public Activity(Builder build) 
     {
         actName = build.nm;
-        startTime = build.strt;
-        endTime = build.end;
+        startTimeh = build.strth;
+        startTimem = build.strtm;
+        endTimeh = build.endh;
+        endTimem = build.endm;
+        patient = build.p;
+        date = build.d;
     }
-    
+
+    public String getPatientID()
+    {
+      return patient;
+    }
+
+    public String getDate()
+    {
+      return date;
+    }
 
     // void setName (String newName) //These classes will be obsolete and will be removed once builder is set up
     // {
@@ -63,7 +96,7 @@ public class Activity {
 
     public String toString ()
     {
-        return actName + "\n " + startTime.toString() + " - " + endTime.toString();
+        return "\t" + actName + "\n\t\t" + startTimeh + ":" + startTimem + " - " + endTimeh + ":" + endTimem + "\n";
     }
 
 }

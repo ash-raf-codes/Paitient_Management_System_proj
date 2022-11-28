@@ -2,30 +2,24 @@ package org.openjfx.Units;
 
 public class Patient extends Person 
 {
-    private String diagnosis;
     private Schedule schedule;
-    private Employee careWorker;
+    private String careWorker;
 
-    public Patient(String fn, String ln, String id, String dob, String diagnosis, Employee cw)
+    public Patient(String fn, String ln, String id, String dob, Employee cw)
     {
         setName(fn, ln);
         setHealthCardNumber(id);
         setDOB(dob);
-        setDiagnosis(diagnosis);
         setSchedule(new Schedule());
-        //setCareWorker(cw);
-        this.careWorker = null;
         setAdapter(new PatientAdapter());
     }
 
-    public Patient(String fn, String ln, String id, String dob, String diagnosis)
+    public Patient(String fn, String ln, String id, String dob)
     {
         setName(fn, ln);
         setHealthCardNumber(id);
         setDOB(dob);
-        setDiagnosis(diagnosis);
-        setSchedule(new Schedule(this));
-        this.careWorker = new Employee.Builder("12345ABC").fn("Bob").ln("Doe").dob("2000-02-02").build();
+        //setSchedule(new Schedule(this));
         setAdapter(new PatientAdapter());
     }
 
@@ -38,14 +32,6 @@ public class Patient extends Person
         setID(id);
     }
 
-    public String getDiagnosis() 
-    {
-        return diagnosis;
-    }
-    public void setDiagnosis(String diagnosis)
-    {
-        this.diagnosis = diagnosis;
-    }
 
     public Schedule getSchedule()
     {
@@ -56,16 +42,16 @@ public class Patient extends Person
         this.schedule = newSchedule;
     }
 
-    public Employee getCareWorker() 
+    public String getCareWorker() 
     {
         return careWorker;
     }
-    public void setCareWorker(Employee careWorker) 
+    public void setCareWorker(String careWorker) 
     {
         this.careWorker = careWorker;
     }
 
     public String toString() {
-        return "Full name: " + getFirstName() + " " + getLastName() + ", Date of birth: " + getDob();
+        return getId() + "\t\tFull name: " + getFirstName() + " " + getLastName() + ", Date of birth: " + getDob();
     }
 }
