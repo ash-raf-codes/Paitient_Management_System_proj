@@ -79,11 +79,33 @@ public class AddPatientPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    if(!InputChecker.checkDate(dobField.getText())){
+                        pAddedLabel.setText("invalid DOB");
+
+                    } else if(!InputChecker.checkName(pfNameField.getText())){
+                        pAddedLabel.setText("invalid first name");
+
+                    } else if(!InputChecker.checkName(plNameField.getText())){
+                        pAddedLabel.setText("invalid last name");
+
+                    } else if(!InputChecker.checkID(idField.getText())){
+                        pAddedLabel.setText("invalid ID");
+
+                    } 
                     Patient newpatient = new Patient(pfNameField.getText(), plNameField.getText(),idField.getText(), dobField.getText());
-                    newpatient.store();
                     String[] empID = ((String)comboBox.getValue()).split(":");
-                    CareWorkerAdapter.addPatientToEmployee(empID[0], newpatient.getId());
-                    pAddedLabel.setText("Patient added!");
+
+                    if(empID[0].length() == 0){
+                        pAddedLabel.setText("Employee not chosen");
+                    }
+                    else if(InputChecker.checkPatient(idField.getText())){ // checks if a patient exists
+                        newpatient.store();
+                        CareWorkerAdapter.addPatientToEmployee(empID[0], newpatient.getId());
+                        pAddedLabel.setText("Patient added!");
+                    } else {
+                        pAddedLabel.setText("Patient already in database.");
+                    }
+                    //pAddedLabel.setText("Patient added!");
                 } catch (Exception e) { e.printStackTrace(); }
             }
         });  // Note this weird }); for action handlers

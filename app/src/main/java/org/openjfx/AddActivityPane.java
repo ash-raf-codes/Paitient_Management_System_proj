@@ -80,31 +80,52 @@ public class AddActivityPane extends VBox {
                     
                     JSONObject jo = new JSONObject();
                     String pID[] = ((String)comboBox.getValue()).split(":");
-                    jo.put("patientID", pID[0]);
-                    jo.put("acName", acNameField.getText()); 
-                    jo.put("dt", (String)dateField.getValue());
-                    jo.put("sthr", stFieldHr.getText());
-                    jo.put("stmin", stFieldMins.getText());
-                    jo.put("ethr", stFieldHr.getText());
-                    jo.put("etmin", etFieldMins.getText());
-                    pList.add(jo);
+
+                    if(pID[0].length() == 0){
+                        pAddedLabel.setText("Patient not chosen");
+                    } else if(!InputChecker.checkHour(stFieldHr.getText())){
+                        pAddedLabel.setText("invalid start hour");
+
+                    } else if(!InputChecker.checkHour(etFieldHr.getText())){
+                        pAddedLabel.setText("invalid end hour");
+
+                    } else if(!InputChecker.checkMinute(stFieldMins.getText())){
+                        pAddedLabel.setText("invalid start minute");
+
+                    } else if(!InputChecker.checkMinute(etFieldMins.getText())){
+                        pAddedLabel.setText("invalid end minute");
+
+                    } else if (!InputChecker.checkTime(stFieldHr.getText(), etFieldHr.getText(), stFieldMins.getText(), etFieldMins.getText())){ 
+                        pAddedLabel.setText("impossible time");
+                    } else if(!InputChecker.checkActivity(pID[0], (String)dateField.getValue(), stFieldHr.getText(), etFieldHr.getText(), stFieldMins.getText(), etFieldMins.getText())){
+                        pAddedLabel.setText("actvity is in another activities time frame");
+
+                    } else {
+                        jo.put("patientID", pID[0]);
+                        jo.put("acName", acNameField.getText()); 
+                        jo.put("dt", (String)dateField.getValue());
+                        jo.put("sthr", stFieldHr.getText());
+                        jo.put("stmin", stFieldMins.getText());
+                        jo.put("ethr", etFieldHr.getText());
+                        jo.put("etmin", etFieldMins.getText());
+                        pList.add(jo);
                     
-                    // writing JSON to file:"JSONExample.json" in cwd 
-                    FileWriter pw = new FileWriter("./src/main/resources/activity.json"); 
-                    pw.write(pList.toJSONString()); 
-                    pw.flush(); 
-                    pw.close(); 
-                    pAddedLabel.setText("Activity added!");
+                        // writing JSON to file:"JSONExample.json" in cwd 
+                        FileWriter pw = new FileWriter("./src/main/resources/activity.json"); 
+                        pw.write(pList.toJSONString()); 
+                        pw.flush(); 
+                        pw.close(); 
+                        pAddedLabel.setText("Activity added!");
 
-                    int startHour = Integer.parseInt(stFieldHr.getText());
-                    int startMins = Integer.parseInt(stFieldMins.getText());
+                        int startHour = Integer.parseInt(stFieldHr.getText());
+                        int startMins = Integer.parseInt(stFieldMins.getText());
 
-                    int endHour = Integer.parseInt(etFieldHr.getText());
-                    int endMins = Integer.parseInt(etFieldMins.getText());
+                        int endHour = Integer.parseInt(etFieldHr.getText());
+                        int endMins = Integer.parseInt(etFieldMins.getText());
                 
-                    //I think this needs to be able to append to SchedulerPane.java
-                    Activity newAc = new Activity.Builder(acNameField.getText()).start(startHour, startMins).end(endHour, endMins).build();
-
+                        //I think this needs to be able to append to SchedulerPane.java
+                        Activity newAc = new Activity.Builder(acNameField.getText()).start(startHour, startMins).end(endHour, endMins).build();
+                    }
                 } catch (Exception e) { e.printStackTrace(); }
             }
         });  // Note this weird }); for action handlers

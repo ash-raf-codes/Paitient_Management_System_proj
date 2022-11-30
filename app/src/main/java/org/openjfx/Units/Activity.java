@@ -78,6 +78,11 @@ public class Activity {
     {
       return date;
     }
+    public int getSTMIN(){ return startTimem;}
+    public int getSTHR(){ return startTimeh;}
+    public int getENDMIN(){ return endTimem;}
+    public int getENDHR(){ return endTimeh;}
+
 
     // void setName (String newName) //These classes will be obsolete and will be removed once builder is set up
     // {

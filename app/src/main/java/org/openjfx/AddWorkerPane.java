@@ -66,11 +66,22 @@ public class AddWorkerPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    // Building the Employee object. Requires an adapter to add it to careworkers.json
-                    Person newEmp = new Employee.Builder(employeeIDField.getText()).fn(wfNameField.getText()).ln(wlNameField.getText()).dob(dobField.getText()).build();
-                    newEmp.store();
-                    pAddedLabel.setText("Employee added!");
-
+                    if(!InputChecker.checkName(wfNameField.getText())){
+                        pAddedLabel.setText("invalid first name");  
+                    } else if(!InputChecker.checkName(wlNameField.getText())){
+                        pAddedLabel.setText("invalid last name");  
+                    } else if(!InputChecker.checkDate(dobField.getText())){
+                        pAddedLabel.setText("invalid DOB");  
+                    } else if(!InputChecker.checkID(employeeIDField.getText())){
+                        pAddedLabel.setText("invalid ID");  
+                    }else if(!InputChecker.checkWorker(employeeIDField.getText())){
+                        pAddedLabel.setText("employee already in database");  
+                    } else{
+                        // Building the Employee object. Requires an adapter to add it to careworkers.json
+                        Person newEmp = new Employee.Builder(employeeIDField.getText()).fn(wfNameField.getText()).ln(wlNameField.getText()).dob(dobField.getText()).build();
+                        newEmp.store();
+                        pAddedLabel.setText("Employee added!");
+                    }
 
                 } catch (Exception e) { e.printStackTrace(); }
             }

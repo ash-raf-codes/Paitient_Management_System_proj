@@ -34,14 +34,14 @@ public class InputChecker {
         return true;
     }
     public static boolean checkHour(String hour){
-        if(hour.length() > 2){return false;}
+        if(hour.length() > 2 || hour.length() < 2){return false;}
         int hour_num = Integer.parseInt(hour);
         if(hour_num < 0 || hour_num > 23){return false;} 
         
         return true;
     }
     public static boolean checkMinute(String minute){
-        if(minute.length() > 2){return false;}
+        if(minute.length() > 2 || minute.length() < 2){return false;}
         int minute_num = Integer.parseInt(minute);
         if(minute_num < 0 || minute_num > 59){return false;} 
         
